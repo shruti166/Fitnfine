@@ -7,10 +7,10 @@ const connect = () => {
   mongoose
     .connect(process.env.MONGO_URL)
     .then(() => {
-      console.log("connection is successfull");
+      console.log("connection is successfull".blue.bold);
     })
     .catch((e) => {
-      console.log("no connection");
+      console.log("no connection".red.bold);
     });
 };
 module.exports = connect;
