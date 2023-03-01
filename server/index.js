@@ -4,12 +4,14 @@ const connect = require("./configs/db.js");
 const logger = require("./middlewear/logger.js");
 const color = require("colors");
 const exerciseRouter = require("./routes/exerciseRouter.js");
+const postRouter = require("./routes/postRouter.js");
 
 app.use(express.json());
 
 app.use(logger);
 
 app.use("/exercise", exerciseRouter);
+app.use("/posts", postRouter);
 
 const port = 8080;
 connect();
