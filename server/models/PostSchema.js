@@ -7,13 +7,17 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     author: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     body: {
-        type: String,
-        required: true
-    }
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true, versionKey: false }
 );
