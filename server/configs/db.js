@@ -1,16 +1,11 @@
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
+const dotenv = require("dotenv");
+dotenv.config();
 
 const connect = () => {
   mongoose
-    .connect(
-      "mongodb+srv://shruti166:shruti166@cluster0.q022tkn.mongodb.net/myfitnesstracker?retryWrites=true&w=majority",
-      {
-        useCreateIndex: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    )
+    .connect(process.env.MONGO_URL)
     .then(() => {
       console.log("connection is successfull");
     })
