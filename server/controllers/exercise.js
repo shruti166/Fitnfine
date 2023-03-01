@@ -1,24 +1,44 @@
+const Exercises = require("../models/ExerciseSchema");
+
 // @desc     Get all Excercises
 // @route    GET /exercise/
-// @access   Public 
+// @access   Public
 
-exports.getExercise = (req, res, next) => {
-    res.status(200).json({success : true, msg: 'Show All exercises'})
-}
+exports.getExercise = async (req, res, next) => {
+    try {
+        const exercise = await Exercises.find();
+        res.status(200).json({ success: true, data: exercise });
+    } catch(err) {
+        res.status(400).json({success: false})
+    }
+  
+};
 
 // @desc     Get single Excercises
 // @route    GET /exercise/:id
-// @access   Public 
+// @access   Public
 
-exports.getSingleExercise = (req, res, next) => {
-    res.status(200).json({success : true, msg: 'Get one exercise'})
-}
+exports.getSingleExercise = async (req, res, next) => {
+    try {
+        const exercise = await Exercises.findById(req.params.id);
+        
+        res.status(200).json({ success: true, data: exercise });
+    } catch (err) {
+        res.status(400).json({success: false, msg: "Bad request"})
+    }
+    
+};
 
 // @desc     Create new  Excercise
 // @route    POST /exercise/create
 // @access   Private
 
-exports.createExercise = (req, res, next) => {
-    res.status(200).json({success : true, msg: 'Create exercises'})
-}
-
+exports.createExercise = async (req, res, next) => {
+  try {
+    const exercise = await Exercises.create(req.body);
+    res.status(201).json({ success: true, data: exercise });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ success: false, msg: "duplicate data"})
+  }
+};
