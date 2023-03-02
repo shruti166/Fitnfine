@@ -1,62 +1,75 @@
 const Posts = require("../models/PostSchema");
-const asyncHandler = require("../middlewear/async")
+const asyncHandler = require("../middlewear/async");
 // @desc     Get all post
 // @route    GET /post/
-// @access   Public 
+// @access   Public
 
-exports.getPost = asyncHandler(async(req, res, next) => {
-    
-        const post = await Posts.find();
-        res.status(200).json({ success: true, data: post});
-   
-})
+exports.getPost = asyncHandler(async (req, res, next) => {
+  const post = await Posts.find();
+  res.status(200).json({ success: true, data: post });
+});
 
 // @desc     Get single Post
 // @route    GET /post/:id
-// @access   Public 
+// @access   Public
 
-exports.getSinglePost = asyncHandler(async(req, res, next) => {
-    
-        const post = await Posts.findById(req.params.id);
-        res.status(200).json({ success: true, data: post});
-   
-})
+exports.getSinglePost = asyncHandler(async (req, res, next) => {
+  const post = await Posts.findById(req.params.id);
+  res.status(200).json({ success: true, data: post });
+});
 
 // @desc     Create new  Post
 // @route    POST /post/create
 // @access   Private
 
-exports.createPost = asyncHandler(async(req, res, next) => {
-   
-        const post = await Posts.create(req.body);
-        res.status(201).json({ success: true, data: post });
-      
-})
+exports.createPost = asyncHandler(async (req, res, next) => {
+  const post = await Posts.create(req.body);
+  res.status(201).json({ success: true, data: post });
+});
 
 // @desc     Update Post
 // @route    PUT /post/update/:id
 // @access   Private
 
-exports.updatePost = asyncHandler(async(req, res, next) => {
-    
-        const post = await Posts.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        })
-        res.status(200).json({success : true, data: post})
-    
-    
-})
+exports.updatePost = asyncHandler(async (req, res, next) => {
+  const post = await Posts.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({ success: true, data: post });
+});
 
 // @desc     Delete Post
 // @route    DELETE /post/delete/:id
 // @access   Private
 
-exports.deletePost = asyncHandler(async(req, res, next) => {
-    
-        const post = await Posts.findByIdAndDelete(req.params.id)
-        res.status(200).json({success : true, msg: 'Post deleted'})
-    
-    
-})
+exports.deletePost = asyncHandler(async (req, res, next) => {
+  const post = await Posts.findByIdAndDelete(req.params.id);
+  res.status(200).json({ success: true, msg: "Post deleted" });
+});
 
+// @desc     Upload photo for Post
+// @route    PUT /post/;id/photo
+// @access   Private
+
+exports.uploadPost = asyncHandler(async (req, res, next) => {
+  const post = await Posts.findById(req.params.id);
+
+  if (!req.files) {
+    res.send({ success: false, msg: "Please upload a file" });
+  }
+  const file = req.files.file;
+  // Check if image is a photo
+
+  if (!file.mimetype.startsWith("image")) {
+    return res.send({ success: false, msg: "File type not valid" });
+  }
+
+  file.mv(file, async (err) => {
+    if (err) {
+      console.log(err);
+    }
+    await Posts.findByIdAndUpdate(req.params.id, { photo: file });
+    res.status({ success: true, data: file });
+  });
+});

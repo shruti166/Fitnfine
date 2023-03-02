@@ -5,12 +5,13 @@ const logger = require("./middlewear/logger.js");
 const color = require("colors");
 const exerciseRouter = require("./routes/exerciseRouter.js");
 const postRouter = require("./routes/postRouter.js");
-const errorHandler = require('./middlewear/error')
+const errorHandler = require('./middlewear/error');
+const fileupload = require('express-fileupload')
 
 app.use(express.json());
 
 app.use(logger);
-
+app.use(fileupload());
 app.use("/exercise", exerciseRouter);
 app.use("/posts", postRouter);
 app.use(errorHandler);
