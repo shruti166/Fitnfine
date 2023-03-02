@@ -10,6 +10,40 @@ exports.getExercise = asyncHandler(async (req, res, next) => {
     res.status(200).json({ success: true, data: exercise });
 });
 
+// Pagination
+
+const page = parseInt(req.query.page, 10) || 1;
+const limit = parseInt(req.query.limit, 10) || 1;
+const startIndex = (page - 1)*limit;
+const endIndex = page*limit;
+const total = await Exercises.countDocuments();
+
+query = query.skip(startIndex).limit(limit);
+
+// Excecuting query
+const exercise = await query;
+
+//Paginantion result 
+
+const pagination = {};
+
+if(endIndex < total) {
+    pagination.next = {
+        page: page + 1,
+        limit
+    }
+}
+
+if(startIndex > 0) {
+    pagination.prev = {
+        page: page - 1,
+        limit
+    }
+}
+
+
+
+
 // @desc     Get single Excercises
 // @route    GET /exercise/:id
 // @access   Public
