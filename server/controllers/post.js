@@ -58,18 +58,9 @@ exports.uploadPost = asyncHandler(async (req, res, next) => {
   if (!req.files) {
     res.send({ success: false, msg: "Please upload a file" });
   }
+  console.log(req.files);
   const file = req.files.file;
   // Check if image is a photo
 
-  if (!file.mimetype.startsWith("image")) {
-    return res.send({ success: false, msg: "File type not valid" });
-  }
-
-  file.mv(file, async (err) => {
-    if (err) {
-      console.log(err);
-    }
-    await Posts.findByIdAndUpdate(req.params.id, { photo: file });
-    res.status({ success: true, data: file });
-  });
+    
 });
