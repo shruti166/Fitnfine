@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 
+
 function App() {
   return (
     <div className="App">
