@@ -27,3 +27,8 @@ img {
 .navbar {
   color: white;
 }
+
+form {
+  width: 40%;
+  margin: auto;
+}
