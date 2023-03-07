@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authAction";
 
 
-export default class Register extends Component {
+
+ class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -25,12 +28,18 @@ export default class Register extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(newUser);
+    this.props.registerUser(newUser);
+    
   }
   render() {
+
+    const { user } = this.props.auth;
+
     return (
       <form onSubmit={this.onSubmit}>
+       
         <div>
+        {user ? user.name : null}
           <p className="lead display-6 text-center">Sign Up</p>
           <p className="lead text-center">
             Create your own account & join our community
@@ -91,3 +100,9 @@ export default class Register extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, { registerUser })(Register)

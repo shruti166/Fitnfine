@@ -2,9 +2,9 @@ import { applyMiddleware, legacy_createStore as createStore, compose } from "red
 import thunk from "redux-thunk";
 import rootReducer from "../reducers";
 const initiaState = {}
-const middlewear = [thunk];
+;
 
- const store = createStore(rootReducer, initiaState, compose(applyMiddleware(...middlewear),
- window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
+ const store = createStore(rootReducer, initiaState, 
+ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
  export default store;

@@ -1,4 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+// import {connect} from 'react-redux';
+// import { loginUser } from '../../actions/authAction';
+
 
 export default class Login extends Component {
     constructor() {
@@ -11,6 +15,8 @@ export default class Login extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
       }
+
+      
     
       onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -74,3 +80,5 @@ export default class Login extends Component {
     )
   }
 }
+
+

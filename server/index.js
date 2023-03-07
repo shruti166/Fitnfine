@@ -3,6 +3,7 @@ const app = express();
 const connect = require("./configs/db.js");
 const logger = require("./middlewear/logger.js");
 const color = require("colors");
+// const passport = require('passport');
 const exerciseRouter = require("./routes/exerciseRouter.js");
 const postRouter = require("./routes/postRouter.js");
 const errorHandler = require('./middlewear/error');
@@ -10,6 +11,10 @@ const fileupload = require('express-fileupload');
 const userRouter = require("./routes/userRouter.js");
 
 app.use(express.json());
+
+// app.use(passport.initialize());
+
+
 
 app.use(logger);
 app.use(fileupload());
