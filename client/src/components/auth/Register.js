@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authAction";
@@ -16,6 +17,8 @@ import { registerUser } from "../../actions/authAction";
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -101,8 +104,10 @@ import { registerUser } from "../../actions/authAction";
   }
 }
 
+
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 })
 
 export default connect(mapStateToProps, { registerUser })(Register)

@@ -3,6 +3,7 @@ import { GET_ERRORS, SET_CURRENT_USER} from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from 'jwt-decode';
 
+
 //Register User
 
 export const registerUser = (userData) => (dispatch) => {
@@ -24,7 +25,7 @@ export const loginUser = (userData) => (dispatch) => {
     .post("/users/login", userData)
     .then((res) => {
         const {token} = res.data;
-
+        // Save to ls
         localStorage.setItem('jwtToken', token);
 
         //Set token to auth header

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-// import {connect} from 'react-redux';
-// import { loginUser } from '../../actions/authAction';
+import {PropTypes} from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authAction';
 
 
-export default class Login extends Component {
+class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -31,6 +31,7 @@ export default class Login extends Component {
         console.log(user);
       }
   render() {
+
     return (
         <form >
         <div>
@@ -80,5 +81,13 @@ export default class Login extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors
+})
+
+export default connect(mapStateToProps, {loginUser})(Login)
 
 
