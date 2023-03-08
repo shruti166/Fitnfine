@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authAction';
+import PropTypes from "prop-types";
 
 
 class Login extends Component {
@@ -9,11 +10,31 @@ class Login extends Component {
         this.state = {
           email: "",
           password: "",
-          errors: {},
+          msg: ""
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
       }
+
+      static propTypes = {
+        loginUser: PropTypes.func,
+        isAuthenticated: PropTypes.bool,
+        status: PropTypes.object,
+        
+      };
+    
+     
+    
+    componentDidUpdate(prevProps) {
+          const status = this.props.status;
+    
+         if (status !== prevProps.status) {
+    
+          if (status.id === "LOGIN_FAIL") {
+            this.setState({ msg: status.statusMsg });
+          }
+        }
+    };
 
       
     
@@ -23,6 +44,11 @@ class Login extends Component {
     
       onSubmit(e) {
         e.preventDefault();
+
+        const { email, password} = this.state;
+
+        const user = { email, password};
+        this.props.loginUser(user);
         
       }
   render() {
@@ -78,10 +104,13 @@ class Login extends Component {
 }
 
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  errors: state.errors
-})
+const mapStateToProps = (state) => ({ //Maps state element in redux store to props
+  //location of element in the state is on the right and key is on the left
+ //store.getState().ui.button another way to get button bool
+  isAuthenticated: state.auth.isAuthenticated,
+  status: state.status,
+  
+});
 
 export default connect(mapStateToProps, {loginUser})(Login)
 

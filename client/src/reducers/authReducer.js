@@ -1,21 +1,51 @@
-import { SET_CURRENT_USER } from "../actions/types";
+import {
 
-const initiaState = {
-  isAuthenticated: false,
-  user: {},
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT_SUCCESS,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  AUTH_SUCCESS,
+  AUTH_FAIL
+} from "../actions/types";
+
+
+const initialState = {
+  isAuthenticated: null,
+  user: null,
 };
 
-export default function authReducer(state = initiaState, action) {
+export default function reducer(state = initialState, action) {
+
   switch (action.type) {
-    case SET_CURRENT_USER:
+    case REGISTER_SUCCESS:
       return {
         ...state,
-        isAuthenticated: action.payload,
-        user: action.payload,
+        user: action.payload
       };
+
+    case LOGIN_SUCCESS:
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload
+      };
+
+    case AUTH_ERROR:
+    case LOGIN_FAIL:
+    case LOGOUT_SUCCESS:
+    case REGISTER_FAIL:
+    case AUTH_FAIL:
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+      }
+
     default:
-      return state;
+        return state;
   }
+
 }
-
-
