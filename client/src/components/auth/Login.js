@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authAction';
 
@@ -24,11 +23,7 @@ class Login extends Component {
     
       onSubmit(e) {
         e.preventDefault();
-        const user = {
-          email: this.state.email,
-          password: this.state.password,
-        };
-        console.log(user);
+        
       }
   render() {
 

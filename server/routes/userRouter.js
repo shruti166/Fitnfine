@@ -47,7 +47,9 @@ userRouter.post('/login', (req, res) => {
 
     User.findOne({email})
     .then(user => {
+      
         //Check for user
+
         if(!user) {
             return res.status(404).json({email: 'User not found'});
         }
