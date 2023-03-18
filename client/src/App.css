@@ -1,11 +1,19 @@
-img {
-  width: 100%;
+* {
+  box-sizing: border-box;
 }
+
+
+/* @media (min-width: 440px) {
+   img {
+    width: 100%;
+   }
+} */
 
 .landing {
   position: relative;
   background: url('../src/img/FitNFine.jpg') no-repeat;
-  background-size: cover;
+  background-size: contain;
+  background-size: 100% 100%;
   background-position: center;
   height: 100vh;
   margin-bottom: -50px;
@@ -32,3 +40,4 @@ form {
   width: 40%;
   margin: auto;
 }
+
