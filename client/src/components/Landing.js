@@ -15,12 +15,12 @@ export default class Landing extends Component {
                 </p>
                 <hr />
                 <div className=" gap-2 d-md-flex justify-content-md-center">
-                  <div className = "registerBtn">
+                  <div className="registerBtn">
                     <Link to="/register" className="btn btn-lg btn-dark">
                       Sign Up
                     </Link>
                   </div>
-                  <div className = "loginBtn">
+                  <div className="loginBtn">
                     <Link to="/login" className="btn btn-lg btn-light">
                       Login
                     </Link>
